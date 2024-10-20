@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios de JavaScript</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .code {
+            background-color: #1e1e1e;
+            padding: 10px;
+            border-radius: 5px;
+            color: #88aeff;
+            font-family: 'Courier New', Courier, monospace;
+            overflow: auto; 
+        }
+        .result {
+            padding: 10px;
+            border-radius: 5px;
+            color: #3a3a3a;
+            margin-top: 10px;
+            font-size: 1.7rem;
+        }
+        
+        h5{
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Exercícios de JavaScript</h1>
+
+        <!-- Exercício 1 -->
+        <div class="card mb-3">
+            <div class="card-body">
+                <h2>Exercício 1: Verificar Notas</h2>
+                <input type="number" id="nota1" placeholder="Digite a 1ª nota" class="form-control mb-2">
+                <input type="number" id="nota2" placeholder="Digite a 2ª nota" class="form-control mb-2">
+                <button class="btn btn-primary" onclick="exercicio1()">Verificar Notas</button>
+                <div class="result" id="result1"></div>
+                <div class="code">
+                    <h5>// Código</h5>
+                    var nota1 = Number(document.getElementById("nota1").value);<br>
+                    var nota2 = Number(document.getElementById("nota2").value);<br>
+                    var media = (nota1 + nota2) / 2;<br>
+                    var resultado1 = `A média das notas é ${media}`;<br>
+                    if (media >= 6) resultado1 += " (acima da média)";<br>
+                    if (nota1 % 2 === 0) resultado1 += `; A nota 1 (${nota1}) é par`;<br>
+                    if (nota2 % 2 === 0) resultado1 += `; A nota 2 (${nota2}) é par`;<br>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exercício 2 -->
+        <div class="card mb-3">
+            <div class="card-body">
+                <h2>Exercício 2: Calcular o IMC</h2>
+                <input type="number" id="peso" placeholder="Digite o peso (kg)" class="form-control mb-2">
+                <input type="number" id="altura" placeholder="Digite a altura (m)" class="form-control mb-2">
+                <button class="btn btn-primary" onclick="exercicio2()">Calcular IMC</button>
+                <div class="result" id="result2"></div>
+                <div class="code">
+                    <h5>// Código</h5>
+                    var peso = Number(document.getElementById("peso").value);<br>
+                    var altura = Number(document.getElementById("altura").value);<br>
+                    var imc = peso / (altura * altura);<br>
+                    document.getElementById("result2").innerText = `O IMC é ${imc.toFixed(2)}`;<br>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exercício 3 -->
+        <div class="card mb-3">
+            <div class="card-body">
+                <h2>Exercício 3: Verificar Ano Bissexto</h2>
+                <input type="number" id="ano" placeholder="Digite o ano" class="form-control mb-2">
+                <button class="btn btn-primary" onclick="exercicio3()">Verificar Ano</button>
+                <div class="result" id="result3"></div>
+                <div class="code">
+                    <h5>// Código</h5>
+                    var ano = Number(document.getElementById("ano").value);<br>
+                    var bissexto = (ano % 4 === 0 && ano % 100 !== 0) || (ano % 400 === 0);<br>
+                    if (bissexto) document.getElementById("result3").innerText = `${ano} é bissexto`;<br>
+                    else document.getElementById("result3").innerText = `${ano} não é bissexto`;<br>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exercício 4 -->
+        <div class="card mb-3">
+            <div class="card-body">
+                <h2>Exercício 4: Converter Moeda</h2>
+                <input type="number" id="taxa" placeholder="Digite a taxa de câmbio" class="form-control mb-2">
+                <input type="number" id="valor" placeholder="Digite o valor" class="form-control mb-2">
+                <button class="btn btn-primary" onclick="exercicio4()">Converter Moeda</button>
+                <div class="result" id="result4"></div>
+                <div class="code">
+                    <h5>// Código</h5>
+                    var taxa = Number(document.getElementById("taxa").value);<br>
+                    var valor = Number(document.getElementById("valor").value);<br>
+                    var convertido = valor * taxa;<br>
+                    document.getElementById("result4").innerText = `${valor} convertido com a taxa ${taxa} é ${convertido}`;<br>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function exercicio1() {
+            var nota1 = Number(document.getElementById("nota1").value);
+            var nota2 = Number(document.getElementById("nota2").value);
+            var media = (nota1 + nota2) / 2;
+            var resultado1 = `A média das notas é ${media}. `;
+            
+            resultado1 += media >= 6 ? "Você está acima da média. " : "Você está abaixo da média. ";
+            resultado1 += nota1 % 2 === 0 ? `A nota 1 (${nota1}) é par. ` : `A nota 1 (${nota1}) é ímpar. `;
+            resultado1 += nota2 % 2 === 0 ? `A nota 2 (${nota2}) é par. ` : `A nota 2 (${nota2}) é ímpar. `;
+            
+            document.getElementById("result1").innerText = resultado1;
+        }
+
+        function exercicio2() {
+            var peso = Number(document.getElementById("peso").value);
+            var altura = Number(document.getElementById("altura").value);
+            var imc = peso / (altura * altura);
+            document.getElementById("result2").innerText = `O IMC é ${imc.toFixed(2)}`;
+        }
+
+        function exercicio3() {
+            var ano = Number(document.getElementById("ano").value);
+            var bissexto = (ano % 4 === 0 && ano % 100 !== 0) || (ano % 400 === 0);
+            if (bissexto) {
+                document.getElementById("result3").innerText = `O ano ${ano} é bissexto.`;
+            } else {
+                document.getElementById("result3").innerText = `O ano ${ano} não é bissexto.`;
+            }
+        }
+
+        function exercicio4() {
+            var taxa = Number(document.getElementById("taxa").value);
+            var valor = Number(document.getElementById("valor").value);
+            var convertido = valor * taxa;
+            document.getElementById("result4").innerText = `O valor de ${valor} convertido com a taxa de ${taxa} é ${convertido}.`;
+        }
+    </script>
+</body>
+</html>

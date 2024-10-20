@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .exercise {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Exercícios JavaScript</h1>
+
+    <div class="exercise">
+        <h2>Exercício 1: Dobro de valores do vetor</h2>
+        <button onclick="dobroValores()">Verificar Dobro</button>
+        <p id="resultado1"></p>
+    </div>
+
+    <div class="exercise">
+        <h2>Exercício 2: Média aritmética de um vetor</h2>
+        <button onclick="mediaValores()">Calcular Média</button>
+        <p id="resultado2"></p>
+    </div>
+
+    <div class="exercise">
+        <h2>Exercício 3: Idades acima da média</h2>
+        <button onclick="idadesAcimaMedia()">Verificar Idades</button>
+        <p id="resultado3"></p>
+    </div>
+
+    <div class="exercise">
+        <h2>Exercício 4: Verificar números pares</h2>
+        <button onclick="verificarPares()">Verificar Pares</button>
+        <p id="resultado4"></p>
+    </div>
+
+    <div class="exercise">
+        <h2>Exercício 5: Verificar nome no vetor</h2>
+        <input type="text" id="nomeInput" placeholder="Digite um nome" />
+        <button onclick="verificarNome()">Verificar Nome</button>
+        <p id="resultado5"></p>
+    </div>
+
+    <script>
+        function dobroValores() {
+            const vetor1 = [2, 5, 8, 12, 20];
+            let resultado = "Dobros: " + vetor1.map(valor => valor * 2).join(", ");
+            document.getElementById("resultado1").innerText = resultado;
+        }
+
+        function mediaValores() {
+            const vetor2 = [3, 5, 7, 10, 12, 15, 18, 20];
+            const soma = vetor2.reduce((acc, valor) => acc + valor, 0);
+            const media = soma / vetor2.length;
+            document.getElementById("resultado2").innerText = "Média: " + media.toFixed(2);
+        }
+        function idadesAcimaMedia() {
+            const idades = [20, 22, 18, 25, 30, 21, 19, 35, 40, 45, 50, 60, 23, 27, 33, 37, 29, 24, 31, 28];
+            const soma = idades.reduce((acc, idade) => acc + idade, 0);
+            const media = soma / idades.length;
+            const acimaMedia = idades.filter(idade => idade > media);
+            document.getElementById("resultado3").innerText = `Média de Idades: ${media.toFixed(2)}, Idades acima da média: ${acimaMedia.join(", ")}`;
+        }
+
+        function verificarPares() {
+            const numeros = [12, 15, 18, 7, 6, 11, 24, 33, 10, 25];
+            const pares = numeros.filter(num => num % 2 === 0);
+            if (pares.length > 0) {
+                document.getElementById("resultado4").innerText = "Números pares: " + pares.join(", ");
+            } else {
+                document.getElementById("resultado4").innerText = "Todos os números são ímpares.";
+            }
+        }
+        function verificarNome() {
+            const nomes = ["Ana", "Carlos", "Maria", "João", "Paula", "Felipe", "Júlia", "Rafael", "Sandra", "Fernando"];
+            const nomeInput = document.getElementById("nomeInput").value;
+            const indice = nomes.indexOf(nomeInput);
+            if (indice !== -1) {
+                document.getElementById("resultado5").innerText = `Nome encontrado na posição: ${indice}`;
+            } else {
+                document.getElementById("resultado5").innerText = "Nome não encontrado!";
+            }
+        }
+    </script>
+
+</body>
+</html>

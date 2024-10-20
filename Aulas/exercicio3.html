@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios de JavaScript</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .code {
+            background-color: #1e1e1e;
+            padding: 10px;
+            border-radius: 5px;
+            color: #88aeff;
+            font-family: 'Courier New', Courier, monospace;
+            overflow: auto; 
+        }
+        .result {
+            padding: 10px;
+            border-radius: 5px;
+            color: #3a3a3a;
+            margin-top: 10px;
+            font-size: 1.7rem;
+        }
+        
+        h5{
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Exercícios de JavaScript</h1>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h2>Exercício 1: Tabuada de um número</h2>
+                <input type="number" id="numeroTabuada" placeholder="Digite um número de 1 a 9" class="form-control mb-2">
+                <button class="btn btn-primary" onclick="exercicio1()">Calcular Tabuada</button>
+                <div class="result" id="result1"></div>
+                <div class="code">
+                    <h5>// Código</h5>
+                    var numero = Number(document.getElementById("numeroTabuada").value);<br>
+                    var resultado = "Tabuada do " + numero + ":\n";<br>
+                    for (var i = 1; i <= 10; i++) {<br>
+                        resultado += `${numero} x ${i} = ${numero * i}\n`;<br>
+                    }<br>
+                    document.getElementById("result1").innerText = resultado;<br>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h2>Exercício 2: Jogo de Pedra, Papel e Tesoura</h2>
+                <button class="btn btn-primary" onclick="exercicio2()">Jogar</button>
+                <div class="result" id="result2"></div>
+                <div class="code">
+                    <h5>// Código</h5>
+                    var opcoes = ["pedra", "papel", "tesoura"];<br>
+                    var escolhaComputador = opcoes[Math.floor(Math.random() * 3)];<br>
+                    var escolhaUsuario = "pedra"; // fixo para este exemplo<br>
+                    var resultado = `Você escolheu: ${escolhaUsuario}\n`; <br>
+                    resultado += `Computador escolheu: ${escolhaComputador}\n`;<br>
+                    if (escolhaComputador === "pedra") resultado += "Empate!";<br>
+                    else if (escolhaComputador === "papel") resultado += "Você perdeu!";<br>
+                    else resultado += "Você ganhou!";<br>
+                    document.getElementById("result2").innerText = resultado;<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h2>Exercício 3: Calcular Fatorial</h2>
+                <input type="number" id="numeroFatorial" placeholder="Digite um número" class="form-control mb-2">
+                <button class="btn btn-primary" onclick="exercicio3()">Calcular Fatorial</button>
+                <div class="result" id="result3"></div>
+                <div class="code">
+                    <h5>// Código</h5>
+                    var numeroFatorial = Number(document.getElementById("numeroFatorial").value);<br>
+                    var fatorial = 1;<br>
+                    for (var i = 1; i <= numeroFatorial; i++) {<br>
+                        fatorial *= i;<br>
+                    }<br>
+                    document.getElementById("result3").innerText = `O fatorial de ${numeroFatorial} é ${fatorial}`;<br>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function exercicio1() {
+            var numero = Number(document.getElementById("numeroTabuada").value);
+            if (numero >= 1 && numero <= 9) {
+                var resultado = `Tabuada do ${numero}:\n`;
+                for (var i = 1; i <= 10; i++) {
+                    resultado += `${numero} x ${i} = ${numero * i}\n`;
+                }
+                document.getElementById("result1").innerText = resultado;
+            } else {
+                document.getElementById("result1").innerText = "Por favor, insira um número válido entre 1 e 9.";
+            }
+        }
+
+        function exercicio2() {
+            var opcoes = ["pedra", "papel", "tesoura"];
+            var escolhaComputador = opcoes[Math.floor(Math.random() * 3)];
+            var escolhaUsuario = "pedra"; 
+
+            var resultado = `Você escolheu: ${escolhaUsuario}\n`;
+            resultado += `O computador escolheu: ${escolhaComputador}\n`;
+
+            if (escolhaComputador === "pedra") {
+                resultado += "Empate!";
+            } else if (escolhaComputador === "papel") {
+                resultado += "Você perdeu! Papel cobre Pedra.";
+            } else {
+                resultado += "Você ganhou! Pedra quebra Tesoura.";
+            }
+
+            document.getElementById("result2").innerText = resultado;
+        }
+
+        function exercicio3() {
+            var numeroFatorial = Number(document.getElementById("numeroFatorial").value);
+            var fatorial = 1;
+
+            for (var i = 1; i <= numeroFatorial; i++) {
+                fatorial *= i;
+            }
+
+            document.getElementById("result3").innerText = `O fatorial de ${numeroFatorial} é ${fatorial}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Centralizando a div container no centro da tela */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+
+        }
+
+        .container {
+            width: 900px;
+            padding: 20px;
+            background-color: rgba(244, 244, 244, 0.9);
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #1f0a89;
+            font-family: "Dancing Script", cursive;
+            font-size: 38px;
+        }
+
+        .product {
+            border: 1px solid #1f0a89;
+            padding: 10px;
+            margin: 10px;
+            width: 230px;
+            display: inline-block;
+
+        }
+
+        .product img {
+            width: 100%;
+            height: 180px;
+        }
+
+        .product h3 {
+            margin-top: 10px;
+            color: #5f3ce9;
+        }
+
+        .quantidade {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantidade input {
+            width: 30px;
+            text-align: center;
+        }
+
+        .quantidade button {
+            border: none;
+            background-color: azure;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .total {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <!--Fazer um conteiner para colocar os componentes-->
+    <div class="container">
+        <!--Titulo da pagina-->
+        <h1><strong>Cursos em Computação</strong></h1>
+        <!--Div com o 1 produto-->
+        <div class="product">
+            <img src="imagens/imagem_produto.jpg" alt="Curso HTML">
+            <h3>Curso em HTML</h3>
+            <div class="quantidade">
+                <button onclick="decrementa(this)"> - </button>
+                <input type="number" id="quantidade1" value="0" min="0">
+                <button onclick="acrescenta(this)"> + </button>
+            </div>
+            <div class="total">Total: R$ <span id="total1">0</span></div>
+        </div>
+
+        <div class="product">
+            <img src="imagens/imagem_produto_2.jpg" alt="Curso Css">
+            <h3>Curso em HTML</h3>
+            <div class="quantidade">
+                <button onclick="decrementa(this)"> - </button>
+                <input type="number" id="quantidade2" value="0" min="0">
+                <button onclick="acrescenta(this)"> + </button>
+            </div>
+            <div class="total">Total: R$ <span id="total2">0</span></div>
+        </div>
+
+        <div class="product">
+            <img src="imagens/imagem_produto_3.jpg" alt="Curso Css">
+            <h3>Curso em HTML</h3>
+            <div class="quantidade">
+                <button onclick="decrementa(this)"> - </button>
+                <input type="number" id="quantidade3" value="0" min="0">
+                <button onclick="acrescenta(this)"> + </button>
+            </div>
+            <div class="total">Total: R$ <span id="total3">0</span></div>
+        </div>
+        <div class="checkout">
+            <h2>Resumo do Pedido</h2>
+            <div class="item">Valor Total dos Produtos: <span id="quantidadeProdutos">0</span></div>
+            <div class="item">Valor a Pagar: R$ <span id="valorAPagar">0</span></div>
+        </div>
+    </div>
+    <script>
+        function acrescenta(button) {
+            let input = button.previousElementSibling;
+            let quantidade = parseInt(input.value);
+            input.value = quantidade + 1;
+            updateTotal(input);
+
+
+            updateCheckout();
+        }
+
+        function decrementa(button) {
+            let input = button.nextElementSibling;
+            let quantidade = parseInt(input.value);
+            if (quantidade > 0) {
+                input.value = quantidade - 1;
+                updateTotal(input);
+
+
+                updateCheckout();
+            }
+        }
+
+        function updateTotal(input) {
+            let quantidade = parseInt(input.value);
+            let preco = 10;
+            let total = quantidade * preco;
+            let totalSpan = input.parentElement.nextElementSibling.querySelector('span');
+            totalSpan.textContent = total;
+        }
+
+        function updateCheckout() {
+            let totalProdutos = 0;
+            let total1 = parseInt(document.getElementById('total1').textContent);
+            let total2 = parseInt(document.getElementById('total2').textContent);
+            let total3 = parseInt(document.getElementById('total3').textContent);
+            totalProdutos = total1 + total2 + total3;
+
+            let quantidadeProdutos = 0;
+            let quantidade1 = parseInt(document.getElementById('quantidade1').value);
+            let quantidade2 = parseInt(document.getElementById('quantidade2').value);
+            let quantidade3 = parseInt(document.getElementById('quantidade3').value);
+            quantidadeProdutos = quantidade1 + quantidade2 + quantidade3;
+
+
+
+            document.getElementById('quantidadeProdutos').textContent = quantidadeProdutos;
+            document.getElementById('valorAPagar').textContent = totalProdutos;
+        }
+
+        // Chamada inicial para atualizar o checkout
+        updateCheckout();
+    </script>
+</body>
+
+</html>

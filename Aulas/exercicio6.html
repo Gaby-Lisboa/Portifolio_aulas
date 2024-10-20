@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios com Classes em JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .exercicio {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Exercícios com Classes</h1>
+
+    <div class="exercicio">
+        <h2>Exercício 1: Classe Carro</h2>
+        <input type="text" id="marcaCarro" placeholder="Marca">
+        <input type="text" id="modeloCarro" placeholder="Modelo">
+        <input type="number" id="anoCarro" placeholder="Ano">
+        <button onclick="criarCarro()">Criar Carro e Buzinar</button>
+        <p id="resultado1"></p>
+    </div>
+
+    <div class="exercicio">
+        <h2>Exercício 2: Classe Livro</h2>
+        <input type="text" id="tituloLivro" placeholder="Título">
+        <input type="text" id="autorLivro" placeholder="Autor">
+        <input type="number" id="anoLivro" placeholder="Ano de Publicação">
+        <button onclick="criarLivro()">Criar Livro e Ver Resumo</button>
+        <p id="resultado2"></p>
+    </div>
+
+
+    <div class="exercicio">
+        <h2>Exercício 3: Classe Livro com Getters e Setters</h2>
+        <input type="text" id="tituloLivro2" placeholder="Título">
+        <input type="text" id="autorLivro2" placeholder="Autor">
+        <input type="number" id="anoLivro2" placeholder="Ano de Publicação">
+        <button onclick="criarLivro2()">Criar Livro com Getters/Setters</button>
+        <p id="resultado3"></p>
+    </div>
+
+    <div class="exercicio">
+        <h2>Exercício 4: Classe Conta Bancária</h2>
+        <input type="number" id="saldoConta" placeholder="Saldo Inicial">
+        <button onclick="criarConta()">Criar Conta Bancária</button>
+        <button onclick="sacar()">Sacar R$ 100</button>
+        <p id="resultado4"></p>
+    </div>
+
+    <div class="exercicio">
+        <h2>Exercício 5: Classe Funcionario e Gerente</h2>
+        <input type="text" id="nomeFuncionario" placeholder="Nome">
+        <input type="number" id="salarioFuncionario" placeholder="Salário">
+        <input type="text" id="departamentoGerente" placeholder="Departamento (Somente para Gerente)">
+        <button onclick="criarFuncionario()">Criar Funcionário</button>
+        <button onclick="criarGerente()">Criar Gerente</button>
+        <p id="resultado5"></p>
+    </div>
+
+    <div class="exercicio">
+        <h2>Exercício Final: Veículo, Carro e Moto</h2>
+        <input type="text" id="marcaVeiculo" placeholder="Marca">
+        <input type="text" id="modeloVeiculo" placeholder="Modelo">
+        <input type="number" id="anoVeiculo" placeholder="Ano">
+        <button onclick="criarCarroFinal()">Criar Carro</button>
+        <button onclick="criarMoto()">Criar Moto</button>
+        <p id="resultadoFinal"></p>
+    </div>
+
+    <script>
+        class Carro {
+            constructor(marca, modelo, ano) {
+                this.marca = marca;
+                this.modelo = modelo;
+                this.ano = ano;
+            }
+
+            buzinar() {
+                return "Bii Bii!";
+            }
+        }
+
+        function criarCarro() {
+            const marca = document.getElementById('marcaCarro').value;
+            const modelo = document.getElementById('modeloCarro').value;
+            const ano = document.getElementById('anoCarro').value;
+            const carro = new Carro(marca, modelo, ano);
+            document.getElementById('resultado1').innerText = `Carro criado: ${marca} ${modelo} (${ano}). Som da buzina: ${carro.buzinar()}`;
+        }
+
+        class Livro {
+            constructor(titulo, autor, anoPublicacao) {
+                this.titulo = titulo;
+                this.autor = autor;
+                this.anoPublicacao = anoPublicacao;
+            }
+
+            resumo() {
+                return `"${this.titulo}" é um livro de ${this.autor} publicado em ${this.anoPublicacao}.`;
+            }
+        }
+
+        function criarLivro() {
+            const titulo = document.getElementById('tituloLivro').value;
+            const autor = document.getElementById('autorLivro').value;
+            const ano = document.getElementById('anoLivro').value;
+            const livro = new Livro(titulo, autor, ano);
+            document.getElementById('resultado2').innerText = livro.resumo();
+        }
+
+        class LivroComGettersSetters {
+            constructor(titulo, autor, anoPublicacao) {
+                this._titulo = titulo;
+                this._autor = autor;
+                this._anoPublicacao = anoPublicacao;
+            }
+
+            get titulo() {
+                return this._titulo;
+            }
+
+            set titulo(novoTitulo) {
+                this._titulo = novoTitulo;
+            }
+
+            get autor() {
+                return this._autor;
+            }
+
+            set autor(novoAutor) {
+                this._autor = novoAutor;
+            }
+
+            get anoPublicacao() {
+                return this._anoPublicacao;
+            }
+
+            set anoPublicacao(novoAno) {
+                this._anoPublicacao = novoAno;
+            }
+
+            resumo() {
+                return `"${this._titulo}" é um livro de ${this._autor} publicado em ${this._anoPublicacao}.`;
+            }
+        }
+
+        function criarLivro2() {
+            const titulo = document.getElementById('tituloLivro2').value;
+            const autor = document.getElementById('autorLivro2').value;
+            const ano = document.getElementById('anoLivro2').value;
+            const livro = new LivroComGettersSetters(titulo, autor, ano);
+            document.getElementById('resultado3').innerText = livro.resumo();
+        }
+
+        class ContaBancaria {
+            #saldo;
+
+            constructor(saldoInicial) {
+                this.#saldo = saldoInicial;
+            }
+
+            sacar(valor) {
+                if (this.#saldo - valor >= 0) {
+                    this.#saldo -= valor;
+                    return `Saque realizado. Saldo atual: R$ ${this.#saldo}`;
+                } else {
+                    return "Saldo insuficiente!";
+                }
+            }
+
+            get saldo() {
+                return this.#saldo;
+            }
+        }
+
+        let conta;
+
+        function criarConta() {
+            const saldo = parseFloat(document.getElementById('saldoConta').value);
+            conta = new ContaBancaria(saldo);
+            document.getElementById('resultado4').innerText = `Conta criada com saldo de R$ ${conta.saldo}`;
+        }
+
+        function sacar() {
+            const resultadoSaque = conta.sacar(100);
+            document.getElementById('resultado4').innerText = resultadoSaque;
+        }
+
+        class Funcionario {
+            constructor(nome, salario) {
+                this.nome = nome;
+                this.salario = salario;
+            }
+        }
+
+        class Gerente extends Funcionario {
+            constructor(nome, salario, departamento) {
+                super(nome, salario);
+                this.departamento = departamento;
+            }
+
+            exibirInformacoes() {
+                return `Nome: ${this.nome}, Salário: R$ ${this.salario}, Departamento: ${this.departamento}`;
+            }
+        }
+
+        function criarFuncionario() {
+            const nome = document.getElementById('nomeFuncionario').value;
+            const salario = document.getElementById('salarioFuncionario').value;
+            const funcionario = new Funcionario(nome, salario);
+            document.getElementById('resultado5').innerText = `Funcionário criado: Nome: ${nome}, Salário: R$ ${salario}`;
+        }
+
+        function criarGerente() {
+            const nome = document.getElementById('nomeFuncionario').value;
+            const salario = document.getElementById('salarioFuncionario').value;
+            const departamento = document.getElementById('departamentoGerente').value;
+            const gerente = new Gerente(nome, salario, departamento);
+            document.getElementById('resultado5').innerText = gerente.exibirInformacoes();
+        }
+
+        class Veiculo {
+            constructor(marca, modelo, ano) {
+                this.marca = marca;
+                this.modelo = modelo;
+                this._ano = ano;
+            }
+
+            get ano() {
+                return this._ano;
+            }
+
+            set ano(novoAno) {
+                this._ano = novoAno;
+            }
+
+            mostrarInformacoes() {
+                return `Veículo: ${this.marca} ${this.modelo}, Ano: ${this.ano}`;
+            }
+        }
+
+        class CarroFinal extends Veiculo {
+            abrirJanelas() {
+                return "As janelas do carro estão abertas.";
+            }
+        }
+
+        class Moto extends Veiculo {
+            empinar() {
+                return "A moto está empinando!";
+            }
+        }
+
+        function criarCarroFinal() {
+            const marca = document.getElementById('marcaVeiculo').value;
+            const modelo = document.getElementById('modeloVeiculo').value;
+            const ano = document.getElementById('anoVeiculo').value;
+            const carro = new CarroFinal(marca, modelo, ano);
+            document.getElementById('resultadoFinal').innerText = `${carro.mostrarInformacoes()} - ${carro.abrirJanelas()}`;
+        }
+
+        function criarMoto() {
+            const marca = document.getElementById('marcaVeiculo').value;
+            const modelo = document.getElementById('modeloVeiculo').value;
+            const ano = document.getElementById('anoVeiculo').value;
+            const moto = new Moto(marca, modelo, ano);
+            document.getElementById('resultadoFinal').innerText = `${moto.mostrarInformacoes()} - ${moto.empinar()}`;
+        }
+
+    </script>
+
+</body>
+</html>
